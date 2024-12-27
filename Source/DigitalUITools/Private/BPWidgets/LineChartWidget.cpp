@@ -1,15 +1,15 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "BPWidgets/TestWidget.h"
+#include "BPWidgets/LineChartWidget.h"
 
-#include "CoreWidgets/STestCoreWidget.h"
+#include "CoreWidgets/SLineChartCoreWidget.h"
 
-void UTestWidget::SynchronizeProperties()
+void ULineChartWidget::SynchronizeProperties()
 {
 	Super::SynchronizeProperties();
 	TestCoreWidget->CF_SyncArgs(
-		STestCoreWidget::FArguments()
+		SLineChartCoreWidget::FArguments()
 		.Points(mPoints).LineWidth(mLineWidth)
 		.AxisFont(mAxisFont).AxisFontColor(mAxisFontColor)
 		.DrawSize(mDrawSize).LineColor(mLineColor)
@@ -17,20 +17,29 @@ void UTestWidget::SynchronizeProperties()
 		.DataFont(mDataFont).DataFontColor(mDataFontColor));
 }
 
-void UTestWidget::ReleaseSlateResources(bool bReleaseChildren)
+
+#if WITH_EDITOR
+const FText ULineChartWidget::GetPaletteCategory()
+{
+	return FText::FromString("Digital UI");
+}
+#endif
+
+
+void ULineChartWidget::ReleaseSlateResources(bool bReleaseChildren)
 {
 	Super::ReleaseSlateResources(bReleaseChildren);
 	TestCoreWidget.Reset();
 }
 
-void UTestWidget::BP_UpdatePoints(TArray<FVector2D> InPoints)
+void ULineChartWidget::BP_UpdatePoints(TArray<FVector2D> InPoints)
 {
 	TestCoreWidget->CF_UpdatePoints(InPoints);
 }
 
-TSharedRef<SWidget> UTestWidget::RebuildWidget()
+TSharedRef<SWidget> ULineChartWidget::RebuildWidget()
 {
-	TestCoreWidget = SNew(STestCoreWidget)
+	TestCoreWidget = SNew(SLineChartCoreWidget)
 		.DrawSize(mDrawSize).LineWidth(mLineWidth)
 		.Points(mPoints);
 	return TestCoreWidget.ToSharedRef();

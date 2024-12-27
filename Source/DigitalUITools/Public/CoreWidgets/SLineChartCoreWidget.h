@@ -8,10 +8,10 @@
 /**
  * 
  */
-class DIGITALUITOOLS_API STestCoreWidget : public SLeafWidget
+class DIGITALUITOOLS_API SLineChartCoreWidget : public SLeafWidget
 {
 public:
-	SLATE_BEGIN_ARGS(STestCoreWidget)
+	SLATE_BEGIN_ARGS(SLineChartCoreWidget)
 	{}
 	SLATE_ARGUMENT(FVector2D,DrawSize)
 	SLATE_ARGUMENT(float,LineWidth)

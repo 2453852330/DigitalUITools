@@ -1,12 +1,12 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "CoreWidgets/STestCoreWidget.h"
+#include "CoreWidgets/SLineChartCoreWidget.h"
 #include "Helpers/LogHelper.h"
 #include "SlateOptMacros.h"
 
 BEGIN_SLATE_FUNCTION_BUILD_OPTIMIZATION
-void STestCoreWidget::Construct(const FArguments& InArgs)
+void SLineChartCoreWidget::Construct(const FArguments& InArgs)
 {
 	// no children
 	mDrawSize = InArgs._DrawSize;
@@ -21,7 +21,7 @@ void STestCoreWidget::Construct(const FArguments& InArgs)
 	mLineColor = InArgs._LineColor;
 }
 
-int32 STestCoreWidget::OnPaint(const FPaintArgs& Args, const FGeometry& AllottedGeometry,
+int32 SLineChartCoreWidget::OnPaint(const FPaintArgs& Args, const FGeometry& AllottedGeometry,
 	const FSlateRect& MyCullingRect, FSlateWindowElementList& OutDrawElements, int32 LayerId,
 	const FWidgetStyle& InWidgetStyle, bool bParentEnabled) const
 {
@@ -77,7 +77,7 @@ int32 STestCoreWidget::OnPaint(const FPaintArgs& Args, const FGeometry& Allotted
 	return LayerId;
 }
 
-void STestCoreWidget::CF_SyncArgs(const FArguments  InArgs)
+void SLineChartCoreWidget::CF_SyncArgs(const FArguments  InArgs)
 {
 	mDrawSize = InArgs._DrawSize;
 	mLineWidth = InArgs._LineWidth;
@@ -91,17 +91,17 @@ void STestCoreWidget::CF_SyncArgs(const FArguments  InArgs)
 	mLineColor = InArgs._LineColor;
 }
 
-void STestCoreWidget::CF_UpdatePoints(TArray<FVector2D> InPoints)
+void SLineChartCoreWidget::CF_UpdatePoints(TArray<FVector2D> InPoints)
 {
 	mPoints = InPoints;
 }
 
-FVector2D STestCoreWidget::ComputeDesiredSize(float) const
+FVector2D SLineChartCoreWidget::ComputeDesiredSize(float) const
 {
 	return mDrawSize;
 }
 
-void STestCoreWidget::CF_CalcPointsSize(float& MaxX, float& MaxY) const
+void SLineChartCoreWidget::CF_CalcPointsSize(float& MaxX, float& MaxY) const
 {
 	for (const FVector2D & it : mPoints)
 	{
@@ -110,7 +110,7 @@ void STestCoreWidget::CF_CalcPointsSize(float& MaxX, float& MaxY) const
 	}
 }
 
-FVector2f STestCoreWidget::CF_ConvertPoint(const FVector2f& Point) const
+FVector2f SLineChartCoreWidget::CF_ConvertPoint(const FVector2f& Point) const
 {
 	return FVector2f(Point.X, GetCachedGeometry().ToPaintGeometry().GetLocalSize().Y - Point.Y);
 }
