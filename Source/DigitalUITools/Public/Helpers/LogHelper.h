@@ -28,3 +28,10 @@
 #define LogScreen(time,format,...)						UKismetSystemLibrary::PrintString(GetWorld(),FString::Printf(TEXT(format),##__VA_ARGS__),true,true,FLinearColor::Red,time);	// print on screen + log
 #define LogScreen_Color(time,color,format,...)			UKismetSystemLibrary::PrintString(GetWorld(),FString::Printf(TEXT(format),##__VA_ARGS__),true,true,FLinearColor##color,time);	// print on screen + log with color
 
+
+// Screen Logs with world
+#define LogScreenOnly(world,time,format,...)					UKismetSystemLibrary::PrintString(world,FString::Printf(TEXT(format),##__VA_ARGS__),true,false,FLinearColor::Red,time);	// print on screen only
+#define LogScreenOnly_Color(world,time,color,format,...)		UKismetSystemLibrary::PrintString(world,FString::Printf(TEXT(format),##__VA_ARGS__),true,false,FLinearColor##color,time);	// print on screen only with color
+#define LogScreen(world,time,format,...)						UKismetSystemLibrary::PrintString(world,FString::Printf(TEXT(format),##__VA_ARGS__),true,true,FLinearColor::Red,time);	// print on screen + log
+#define LogScreen_Color(world,time,color,format,...)			UKismetSystemLibrary::PrintString(world,FString::Printf(TEXT(format),##__VA_ARGS__),true,true,FLinearColor##color,time);	// print on screen + log with color
+

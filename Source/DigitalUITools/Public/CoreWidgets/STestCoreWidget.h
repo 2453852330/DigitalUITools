@@ -15,7 +15,14 @@ public:
 	{}
 	SLATE_ARGUMENT(FVector2D,DrawSize)
 	SLATE_ARGUMENT(float,LineWidth)
+	SLATE_ARGUMENT(FLinearColor,LineColor)
 	SLATE_ARGUMENT(TArray<FVector2D>,Points)
+	SLATE_ARGUMENT(FString,XAxisName)
+	SLATE_ARGUMENT(FString,YAxisName)
+	SLATE_ARGUMENT(FSlateFontInfo,AxisFont)
+	SLATE_ARGUMENT(FLinearColor,AxisFontColor)
+	SLATE_ARGUMENT(FSlateFontInfo,DataFont)
+	SLATE_ARGUMENT(FLinearColor,DataFontColor)
 	SLATE_END_ARGS()
 
 	/** Constructs this widget with InArgs */
@@ -25,15 +32,26 @@ public:
 	                      FSlateWindowElementList& OutDrawElements, int32 LayerId, const FWidgetStyle& InWidgetStyle,
 	                      bool bParentEnabled) const override;
 
-	void CF_SyncPoints(const TArray<FVector2D> & InPoints);
+	void CF_SyncArgs(const FArguments InArgs);
+
+	void CF_UpdatePoints(TArray<FVector2D> InPoints);
 private:
 	FVector2D mDrawSize;
 	float mLineWidth = 0.f;
 	TArray<FVector2D> mPoints;
+	FSlateFontInfo mAxisFont;
+	FLinearColor mAxisFontColor;
+	FSlateFontInfo mDataFont;
+	FLinearColor mDataFontColor;
+	FString mXAxisName;
+	FString mYAxisName;
+	FLinearColor mLineColor;
 	virtual FVector2D ComputeDesiredSize(float) const override;
 
 	void CF_CalcPointsSize(float & MaxX,float & MaxY) const;
-	FVector2D CF_ConvertPoint(const FVector2D & Point) const;
+	FVector2f CF_ConvertPoint(const FVector2f & Point) const;
 };
+
+
 
 
